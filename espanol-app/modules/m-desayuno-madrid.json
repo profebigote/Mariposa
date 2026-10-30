@@ -1,0 +1,139 @@
+{
+  "id": "m-desayuno-madrid",
+  "type": "adventure",
+  "title": "Un desayuno en Madrid",
+  "rubrique": "situaciones",
+  "theme": "Café et restaurant",
+  "level": "A1+",
+  "duration": 5,
+  "status": "brouillon",
+  "version": 1,
+  "objectives": {
+    "main": "Pedir algo en una cafetería española, con educación.",
+    "secondary": ["Elegir entre dos opciones", "Entender un precio", "Pagar y despedirse"],
+    "outcome": "pedir un desayuno, entender el precio y pagar.",
+    "lexicon": ["una tostada", "con tomate", "con mantequilla", "un café con leche", "un zumo de naranja", "por favor", "¿Cuánto es?"],
+    "grammar": ["Quiero + nombre", "Un / una + nombre", "Fórmulas de cortesía (por favor, gracias)"],
+    "prerequisites": []
+  },
+  "skills": ["pedir-cafeteria"],
+  "intro": {
+    "es": "Son las ocho de la mañana. Entras en un café de Madrid y tienes hambre.",
+    "fr": "Il est huit heures du matin. Tu entres dans un café de Madrid et tu as faim."
+  },
+  "scene": "cafe",
+  "cast": {
+    "marta": { "name": "Marta", "skin": 1, "hair": 1, "shirt": 0 },
+    "tu": { "name": "Tú", "player": true, "skin": 0, "hair": 2, "shirt": 1 }
+  },
+  "vars": { "topping": "tomate", "toppingFr": "à la tomate", "drink": "un café con leche", "drinkFr": "un café au lait" },
+  "start": "n1",
+  "nodes": [
+    { "id": "n1", "type": "say", "speaker": "marta", "es": "¡Hola! ¿Qué te pongo?", "fr": "Bonjour ! Qu'est-ce que je te sers ?", "next": "n2" },
+
+    { "id": "n2", "type": "choice",
+      "prompt": { "es": "¿Qué respondes?", "fr": "Que réponds-tu ?" },
+      "options": [
+        { "es": "Una tostada, por favor.", "fr": "Une tartine, s'il vous plaît.", "ok": true, "next": "n3",
+          "why": { "es": "Frase corta y educada: «un/una + nombre + por favor».", "fr": "Phrase courte et polie : « un/une + nom + por favor »." } },
+        { "es": "Quiero una tostada, por favor.", "fr": "Je voudrais une tartine, s'il vous plaît.", "ok": true, "next": "n3" },
+        { "es": "Dame una tostada.", "fr": "Donne-moi une tartine.", "ok": false, "errorKind": "register",
+          "hint": { "es": "Es muy directo. ¿Qué palabra mágica puedes añadir?", "fr": "C'est très direct. Quel mot magique peux-tu ajouter ?" },
+          "explain": { "es": "En un café, una orden sola suena seca. Añade «por favor» o empieza con «Quiero…».", "fr": "Dans un café, un ordre seul semble sec. Ajoute « por favor » ou commence par « Quiero… »." } },
+        { "es": "Un tostada, por favor.", "ok": false, "errorKind": "gender",
+          "hint": { "es": "Mira el final de «tostada»: ¿masculino o femenino?", "fr": "Regarde la fin de « tostada » : masculin ou féminin ?" },
+          "explain": { "es": "«Tostada» acaba en -a: es femenino, así que decimos «una tostada».", "fr": "« Tostada » finit en -a : c'est féminin, on dit donc « una tostada »." } },
+        { "es": "Hasta luego, gracias.", "fr": "À tout à l'heure, merci.", "ok": false, "errorKind": "situation",
+          "hint": { "es": "Acabas de entrar. ¿Qué quieres hacer primero?", "fr": "Tu viens d'entrer. Que veux-tu faire en premier ?" } }
+      ] },
+
+    { "id": "n3", "type": "say", "speaker": "marta", "es": "¿Con tomate o con mantequilla?", "fr": "Avec de la tomate ou avec du beurre ?", "next": "n4" },
+
+    { "id": "n4", "type": "choice",
+      "prompt": { "es": "Elige lo que más te gusta.", "fr": "Choisis ce que tu préfères." },
+      "options": [
+        { "es": "Con tomate, por favor.", "fr": "À la tomate, s'il vous plaît.", "ok": true, "next": "n5", "set": { "topping": "tomate", "toppingFr": "à la tomate" } },
+        { "es": "Con mantequilla, por favor.", "fr": "Au beurre, s'il vous plaît.", "ok": true, "next": "n5", "set": { "topping": "mantequilla", "toppingFr": "au beurre" } },
+        { "es": "Sí, gracias.", "fr": "Oui, merci.", "ok": false, "errorKind": "situation",
+          "hint": { "es": "La pregunta tiene «o»: hay que elegir una de las dos.", "fr": "La question contient « o » (ou) : il faut choisir l'une des deux." },
+          "explain": { "es": "Marta pregunta «tomate o mantequilla». Responde con «con tomate» o «con mantequilla».", "fr": "Marta demande « tomate o mantequilla ». Réponds par « con tomate » ou « con mantequilla »." } },
+        { "es": "Con zapatos, por favor.", "fr": "Avec des chaussures, s'il vous plaît.", "ok": false, "errorKind": "meaning",
+          "hint": { "es": "¿Qué se pone en una tostada?", "fr": "Que met-on sur une tartine ?" } }
+      ] },
+
+    { "id": "n5", "type": "branch", "cases": [ { "if": { "topping": "tomate" }, "next": "n5t" } ], "else": "n5m" },
+    { "id": "n5t", "type": "say", "speaker": "marta", "es": "¡Buena elección! En Madrid, la tostada con tomate es muy típica.", "fr": "Bon choix ! À Madrid, la tartine à la tomate est très typique.", "next": "n6" },
+    { "id": "n5m", "type": "say", "speaker": "marta", "es": "¡Muy bien! La mantequilla con pan caliente está riquísima.", "fr": "Très bien ! Le beurre sur du pain chaud est délicieux.", "next": "n6" },
+
+    { "id": "n6", "type": "say", "speaker": "marta", "es": "¿Y para beber?", "fr": "Et pour boire ?", "next": "n7" },
+
+    { "id": "n7", "type": "build",
+      "prompt": { "es": "Construye tu respuesta: pide algo de beber.", "fr": "Construis ta réponse : commande une boisson." },
+      "tiles": ["Quiero", "un", "café", "con", "leche", "zumo", "de", "naranja", "por", "favor"],
+      "accept": [
+        { "text": "Un café con leche, por favor", "es": "Un café con leche, por favor.", "fr": "Un café au lait, s'il vous plaît.", "next": "n8", "set": { "drink": "un café con leche", "drinkFr": "un café au lait" } },
+        { "text": "Quiero un café con leche, por favor", "es": "Quiero un café con leche, por favor.", "fr": "Je voudrais un café au lait, s'il vous plaît.", "next": "n8", "set": { "drink": "un café con leche", "drinkFr": "un café au lait" } },
+        { "text": "Un zumo de naranja, por favor", "es": "Un zumo de naranja, por favor.", "fr": "Un jus d'orange, s'il vous plaît.", "next": "n8", "set": { "drink": "un zumo de naranja", "drinkFr": "un jus d'orange" } },
+        { "text": "Quiero un zumo de naranja, por favor", "es": "Quiero un zumo de naranja, por favor.", "fr": "Je voudrais un jus d'orange, s'il vous plaît.", "next": "n8", "set": { "drink": "un zumo de naranja", "drinkFr": "un jus d'orange" } }
+      ],
+      "hint": { "es": "Empieza con «Un…» o con «Quiero un…». Termina con «por favor».", "fr": "Commence par « Un… » ou « Quiero un… ». Termine par « por favor »." },
+      "explain": { "es": "Dos formas correctas: «Un café con leche, por favor» o «Quiero un café con leche, por favor». Puedes elegir café o zumo.", "fr": "Deux formes correctes : « Un café con leche, por favor » ou « Quiero un café con leche, por favor ». Tu peux choisir café ou jus." },
+      "solution": { "es": "Un café con leche, por favor.", "fr": "Un café au lait, s'il vous plaît." } },
+
+    { "id": "n8", "type": "say", "speaker": "marta", "es": "Marchando: una tostada con {{topping}} y {{drink}}.", "fr": "C'est parti : une tartine {{toppingFr}} et {{drinkFr}}.", "next": "n8b" },
+    { "id": "n8b", "type": "say", "speaker": "marta", "es": "Son tres euros con cincuenta.", "fr": "Ça fait trois euros cinquante.", "next": "n9" },
+
+    { "id": "n9", "type": "choice",
+      "prompt": { "es": "¿Cuánto tienes que pagar?", "fr": "Combien dois-tu payer ?" },
+      "options": [
+        { "es": "3,50 €", "ok": true, "next": "n10", "why": { "es": "«Tres euros con cincuenta» = 3 € y 50 céntimos.", "fr": "« Tres euros con cincuenta » = 3 € et 50 centimes." } },
+        { "es": "13,50 €", "ok": false, "errorKind": "meaning" },
+        { "es": "3,15 €", "ok": false, "errorKind": "meaning" },
+        { "es": "30,50 €", "ok": false, "errorKind": "meaning" }
+      ],
+      "keepOrder": true,
+      "hint": { "es": "«Tres euros» = 3 €. «Con cincuenta» = ,50.", "fr": "« Tres euros » = 3 €. « Con cincuenta » = ,50." },
+      "explain": { "es": "tres = 3 · cincuenta = 50 → 3,50 €.", "fr": "tres = 3 · cincuenta = 50 → 3,50 €." } },
+
+    { "id": "n10", "type": "choice",
+      "prompt": { "es": "Quieres pagar. ¿Qué dices?", "fr": "Tu veux payer. Que dis-tu ?" },
+      "options": [
+        { "es": "Aquí tienes.", "fr": "Tiens, voilà.", "ok": true, "next": "n11", "set": { "pay": "cash" } },
+        { "es": "¿Puedo pagar con tarjeta?", "fr": "Puis-je payer par carte ?", "ok": true, "next": "n11", "set": { "pay": "card" } },
+        { "es": "Adiós, hasta mañana.", "fr": "Au revoir, à demain.", "ok": false, "errorKind": "situation",
+          "hint": { "es": "Todavía no has pagado.", "fr": "Tu n'as pas encore payé." } },
+        { "es": "Me gusta el café.", "fr": "J'aime le café.", "ok": false, "errorKind": "situation",
+          "hint": { "es": "Marta te ha dicho el precio. ¿Qué haces ahora?", "fr": "Marta t'a dit le prix. Que fais-tu maintenant ?" } }
+      ] },
+
+    { "id": "n11", "type": "branch", "cases": [ { "if": { "pay": "card" }, "next": "n11c" } ], "else": "n11m" },
+    { "id": "n11c", "type": "say", "speaker": "marta", "es": "Claro. Aquí tienes el datáfono. ¡Que aproveche!", "fr": "Bien sûr. Voici le terminal de paiement. Bon appétit !", "next": "n12" },
+    { "id": "n11m", "type": "say", "speaker": "marta", "es": "Gracias. ¡Que aproveche!", "fr": "Merci. Bon appétit !", "next": "n12" },
+
+    { "id": "n12", "type": "choice",
+      "prompt": { "es": "Te despides. ¿Qué dices?", "fr": "Tu prends congé. Que dis-tu ?" },
+      "options": [
+        { "es": "Gracias. ¡Hasta luego!", "fr": "Merci. À tout à l'heure !", "ok": true, "next": "n13" },
+        { "es": "Gracias. ¡Que tengas un buen día!", "fr": "Merci. Bonne journée !", "ok": true, "next": "n13" },
+        { "es": "¡Buenas noches!", "fr": "Bonne nuit !", "ok": false, "errorKind": "situation",
+          "hint": { "es": "Son las ocho de la mañana.", "fr": "Il est huit heures du matin." },
+          "explain": { "es": "«Buenas noches» se dice por la noche. Por la mañana: «¡Buenos días!» o «¡Hasta luego!».", "fr": "« Buenas noches » se dit le soir. Le matin : « ¡Buenos días! » ou « ¡Hasta luego! »." } },
+        { "es": "¿Qué te pongo?", "fr": "Qu'est-ce que je te sers ?", "ok": false, "errorKind": "situation",
+          "hint": { "es": "Esa frase la dice la camarera, no el cliente.", "fr": "Cette phrase, c'est la serveuse qui la dit, pas le client." } }
+      ] },
+
+    { "id": "n13", "type": "say", "speaker": "marta", "es": "¡Hasta luego! ¡Que tengas un buen día!", "fr": "À tout à l'heure ! Bonne journée !", "next": "fin" },
+
+    { "id": "fin", "type": "end", "es": "¡Misión cumplida! Ya sabes pedir algo en una cafetería.", "fr": "Mission accomplie ! Tu sais maintenant commander dans un café." }
+  ],
+  "completion": {
+    "es": "¡Misión cumplida! Ya sabes pedir algo en una cafetería.",
+    "fr": "Mission accomplie ! Tu sais commander quelque chose dans un café.",
+    "review": [
+      { "id": "tostada", "es": "una tostada", "fr": "une tartine grillée", "emoji": "🍞" },
+      { "id": "mantequilla", "es": "la mantequilla", "fr": "le beurre", "emoji": "🧈" },
+      { "id": "zumo", "es": "el zumo de naranja", "fr": "le jus d'orange", "emoji": "🍊" }
+    ],
+    "next": ["m-frigorifico-lucia"]
+  }
+}
