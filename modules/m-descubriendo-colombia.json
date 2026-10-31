@@ -1,0 +1,395 @@
+{
+  "id": "m-descubriendo-colombia",
+  "type": "reading",
+  "title": "Descubriendo Colombia",
+  "rubrique": "lecturas",
+  "theme": "Découvrir l'Amérique latine",
+  "level": "A2+",
+  "duration": 8,
+  "status": "brouillon",
+  "version": 1,
+  "objectives": {
+    "main": "Comprender un texto cultural corto sobre Colombia y reaccionar a él.",
+    "secondary": [
+      "Localizar informaciones precisas",
+      "Deducir el sentido de una expresión",
+      "Dar su opinión con «porque»"
+    ],
+    "outcome": "entender un texto cultural, encontrar las informaciones importantes y decir qué te gustaría visitar.",
+    "lexicon": [
+      "la costa",
+      "la selva",
+      "las murallas",
+      "el café",
+      "el escritor",
+      "el premio"
+    ],
+    "grammar": [
+      "Presente de hay / está",
+      "Me gustaría + infinitivo",
+      "porque + causa"
+    ],
+    "prerequisites": []
+  },
+  "skills": [
+    "comprender-texto-cultural"
+  ],
+  "intro": {
+    "es": "Un viaje de lectura por Colombia: lee el texto y descubre el país.",
+    "fr": "Un voyage de lecture en Colombie : lis le texte et découvre le pays."
+  },
+  "doc": {
+    "title": "Colombia, un país de muchos paisajes",
+    "source": "Texte original écrit pour Proyecto Mariposa (niveau A2+) — brouillon à relire.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Colombia está en el noroeste de América del Sur. Tiene costa en dos mares: el mar Caribe y el océano Pacífico. Su capital es Bogotá, una ciudad grande que está a más de 2 600 metros de altura."
+      },
+      {
+        "type": "p",
+        "text": "En el país hay montañas, selvas, playas y desiertos. Los Andes se dividen en tres cordilleras y, al sur, está la selva amazónica. Por eso Colombia es uno de los países con más biodiversidad del mundo."
+      },
+      {
+        "type": "heading",
+        "text": "Ciudades y cultura"
+      },
+      {
+        "type": "p",
+        "text": "En Cartagena de Indias, en la costa del Caribe, hay una ciudad antigua rodeada de murallas. En Medellín el clima es suave todo el año y por eso la llaman «la ciudad de la eterna primavera»."
+      },
+      {
+        "type": "p",
+        "text": "El café colombiano es famoso en todo el mundo. Se cultiva sobre todo en el Eje Cafetero, una región de montañas verdes y pueblos de colores. A muchos colombianos les gusta tomar un «tinto», un café negro, por la mañana. También les gusta bailar cumbia y vallenato."
+      },
+      {
+        "type": "quote",
+        "text": "El escritor Gabriel García Márquez, nacido en Aracataca, recibió el premio Nobel de Literatura en 1982. Su novela «Cien años de soledad» es muy conocida."
+      },
+      {
+        "type": "facts",
+        "items": [
+          {
+            "emoji": "🌎",
+            "text": "Capital: Bogotá"
+          },
+          {
+            "emoji": "💬",
+            "text": "Idioma: español"
+          },
+          {
+            "emoji": "💰",
+            "text": "Moneda: el peso colombiano"
+          },
+          {
+            "emoji": "☕",
+            "text": "Producto famoso: el café"
+          }
+        ]
+      }
+    ],
+    "glossary": [
+      {
+        "w": "costa",
+        "fr": "côte"
+      },
+      {
+        "w": "altura",
+        "fr": "altitude"
+      },
+      {
+        "w": "selva",
+        "fr": "forêt tropicale"
+      },
+      {
+        "w": "murallas",
+        "fr": "remparts"
+      },
+      {
+        "w": "se cultiva",
+        "fr": "est cultivé"
+      },
+      {
+        "w": "tinto",
+        "fr": "café noir (en Colombie)"
+      },
+      {
+        "w": "escritor",
+        "fr": "écrivain"
+      },
+      {
+        "w": "premio",
+        "fr": "prix"
+      }
+    ]
+  },
+  "phases": [
+    {
+      "id": "comprender",
+      "title": "Encontrar la información",
+      "steps": [
+        {
+          "kind": "select",
+          "title": {
+            "es": "¿Dónde está Colombia?",
+            "fr": "Où se trouve la Colombie ?"
+          },
+          "prompt": {
+            "es": "Toca las frases que dicen dónde está Colombia.",
+            "fr": "Touche les phrases qui disent où se trouve la Colombie."
+          },
+          "passages": [
+            "Colombia está en el noroeste de América del Sur.",
+            "Tiene costa en dos mares: el mar Caribe y el océano Pacífico.",
+            "Su capital es Bogotá.",
+            "En Cartagena de Indias hay una ciudad antigua rodeada de murallas."
+          ],
+          "correct": [
+            0,
+            1
+          ],
+          "hint": {
+            "es": "Busca las frases con «está en» y con los mares.",
+            "fr": "Cherche les phrases avec « está en » et avec les mers."
+          },
+          "explain": {
+            "es": "La primera frase da la zona del mundo; la segunda, los mares que la tocan.",
+            "fr": "La première phrase donne la zone du monde ; la deuxième, les mers qui la bordent."
+          }
+        },
+        {
+          "kind": "match",
+          "title": {
+            "es": "Cada lugar, una característica",
+            "fr": "Chaque lieu, une caractéristique"
+          },
+          "pairs": [
+            {
+              "left": "Bogotá",
+              "right": "La capital, a más de 2 600 metros"
+            },
+            {
+              "left": "Cartagena",
+              "right": "Ciudad antigua con murallas"
+            },
+            {
+              "left": "Medellín",
+              "right": "Clima suave todo el año"
+            },
+            {
+              "left": "Eje Cafetero",
+              "right": "Montañas verdes y café"
+            }
+          ]
+        },
+        {
+          "kind": "classify",
+          "title": {
+            "es": "Naturaleza o artes",
+            "fr": "Nature ou arts"
+          },
+          "categories": [
+            {
+              "id": "nat",
+              "label": {
+                "es": "Naturaleza",
+                "fr": "Nature"
+              }
+            },
+            {
+              "id": "art",
+              "label": {
+                "es": "Música y literatura",
+                "fr": "Musique et littérature"
+              }
+            }
+          ],
+          "items": [
+            {
+              "text": "las montañas",
+              "cat": "nat"
+            },
+            {
+              "text": "la selva amazónica",
+              "cat": "nat"
+            },
+            {
+              "text": "las playas",
+              "cat": "nat"
+            },
+            {
+              "text": "la cumbia",
+              "cat": "art"
+            },
+            {
+              "text": "el vallenato",
+              "cat": "art"
+            },
+            {
+              "text": "«Cien años de soledad»",
+              "cat": "art"
+            }
+          ],
+          "hint": {
+            "es": "¿Existía antes de las personas, o la crean las personas?",
+            "fr": "Existait-ce avant les humains, ou les humains l'ont-ils créé ?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "interpretar",
+      "title": "Deducir y justificar",
+      "steps": [
+        {
+          "kind": "short",
+          "title": {
+            "es": "¿Por qué tanta biodiversidad?",
+            "fr": "Pourquoi autant de biodiversité ?"
+          },
+          "prompt": {
+            "es": "Según el texto, ¿por qué Colombia tiene tanta biodiversidad? Responde con una frase corta.",
+            "fr": "Selon le texte, pourquoi la Colombie a-t-elle autant de biodiversité ? Réponds par une phrase courte."
+          },
+          "accept": [
+            {
+              "all": [
+                [
+                  "paisaj*",
+                  "monta*",
+                  "selva*",
+                  "playa*",
+                  "desierto*",
+                  "costa*",
+                  "mares",
+                  "climas",
+                  "variedad",
+                  "diferentes"
+                ]
+              ]
+            }
+          ],
+          "hint": {
+            "es": "Mira el segundo párrafo: ¿qué tipos de paisajes hay?",
+            "fr": "Regarde le deuxième paragraphe : quels types de paysages y a-t-il ?"
+          },
+          "explain": {
+            "es": "Hay muchos paisajes distintos (montañas, selvas, playas, desiertos) y por eso hay muchas especies.",
+            "fr": "Il y a beaucoup de paysages différents (montagnes, forêts, plages, déserts) et donc beaucoup d'espèces."
+          },
+          "solution": {
+            "es": "Porque hay montañas, selvas, playas y desiertos.",
+            "fr": "Parce qu'il y a des montagnes, des forêts, des plages et des déserts."
+          }
+        },
+        {
+          "kind": "order",
+          "title": {
+            "es": "El plan del texto",
+            "fr": "Le plan du texte"
+          },
+          "prompt": {
+            "es": "Ordena los temas como aparecen en el texto.",
+            "fr": "Remets les thèmes dans l'ordre où ils apparaissent dans le texte."
+          },
+          "items": [
+            "Dónde está Colombia",
+            "Sus paisajes",
+            "Ciudades antiguas y modernas",
+            "El café y la música",
+            "Un escritor famoso"
+          ],
+          "hint": {
+            "es": "Empieza por la situación geográfica.",
+            "fr": "Commence par la situation géographique."
+          }
+        },
+        {
+          "kind": "choice",
+          "prompt": {
+            "es": "El texto llama a Medellín «la ciudad de la eterna primavera». ¿Qué crees que significa?",
+            "fr": "Le texte appelle Medellín « la ciudad de la eterna primavera ». Que crois-tu que cela signifie ?"
+          },
+          "options": [
+            {
+              "text": "Hace un clima agradable casi todo el año.",
+              "ok": true
+            },
+            {
+              "text": "Solo llueve en primavera.",
+              "ok": false,
+              "errorKind": "meaning"
+            },
+            {
+              "text": "Está al lado del mar.",
+              "ok": false,
+              "errorKind": "meaning"
+            }
+          ],
+          "hint": {
+            "es": "Lee la frase anterior: habla del clima.",
+            "fr": "Relis la phrase précédente : elle parle du climat."
+          },
+          "explain": {
+            "es": "«El clima es suave todo el año»: como en primavera, ni mucho calor ni mucho frío.",
+            "fr": "« El clima es suave todo el año » : comme au printemps, ni trop chaud ni trop froid."
+          }
+        }
+      ]
+    },
+    {
+      "id": "reaccionar",
+      "title": "Dar tu opinión",
+      "steps": [
+        {
+          "kind": "react",
+          "title": {
+            "es": "¿Qué te gustaría visitar?",
+            "fr": "Que voudrais-tu visiter ?"
+          },
+          "prompt": {
+            "es": "¿Qué lugar del texto te gustaría visitar? Escribe una o dos frases y explica por qué.",
+            "fr": "Quel lieu du texte aimerais-tu visiter ? Écris une ou deux phrases et explique pourquoi."
+          },
+          "model": {
+            "es": "Me gustaría visitar Cartagena porque quiero ver las murallas y la playa.",
+            "fr": "J'aimerais visiter Carthagène parce que je veux voir les remparts et la plage."
+          },
+          "checklist": [
+            {
+              "es": "He nombrado un lugar del texto.",
+              "fr": "J'ai nommé un lieu du texte."
+            },
+            {
+              "es": "He explicado por qué con «porque».",
+              "fr": "J'ai expliqué pourquoi avec « porque »."
+            }
+          ]
+        },
+        {
+          "kind": "recap",
+          "points": [
+            {
+              "es": "Sabes localizar informaciones en un texto cultural.",
+              "fr": "Tu sais repérer des informations dans un texte culturel."
+            },
+            {
+              "es": "Puedes deducir el sentido de una expresión con el contexto.",
+              "fr": "Tu peux déduire le sens d'une expression grâce au contexte."
+            },
+            {
+              "es": "Sabes decir qué te gustaría visitar, y por qué.",
+              "fr": "Tu sais dire ce que tu aimerais visiter, et pourquoi."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "es": "¡Misión cumplida! Ya sabes leer un texto cultural y reaccionar a él.",
+    "fr": "Mission accomplie ! Tu sais lire un texte culturel et y réagir.",
+    "review": [],
+    "next": []
+  }
+}

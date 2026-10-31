@@ -1,0 +1,428 @@
+{
+  "id": "m-frigorifico-lucia",
+  "type": "vocab",
+  "title": "El frigorífico de Lucía",
+  "rubrique": "palabras",
+  "theme": "Alimentos",
+  "level": "A1",
+  "duration": 6,
+  "status": "brouillon",
+  "version": 1,
+  "objectives": {
+    "main": "Reconocer y utilizar doce alimentos de la cocina.",
+    "secondary": [
+      "Asociar palabra e imagen",
+      "Recordar la palabra sin ayuda",
+      "Utilizar el vocabulario en una frase"
+    ],
+    "outcome": "nombrar los alimentos de un frigorífico y usarlos en frases sencillas.",
+    "lexicon": [
+      "la manzana",
+      "el queso",
+      "la leche",
+      "los huevos",
+      "el tomate",
+      "la zanahoria",
+      "el pescado",
+      "la mantequilla",
+      "el zumo",
+      "las uvas",
+      "la lechuga",
+      "el pollo"
+    ],
+    "grammar": [
+      "Artículos el / la / los / las"
+    ],
+    "prerequisites": []
+  },
+  "skills": [
+    "reconocer-alimentos"
+  ],
+  "intro": {
+    "es": "Lucía abre su frigorífico. ¿Qué hay dentro?",
+    "fr": "Lucía ouvre son frigo. Qu'y a-t-il dedans ?"
+  },
+  "items": [
+    {
+      "id": "manzana",
+      "es": "la manzana",
+      "fr": "la pomme",
+      "emoji": "🍎"
+    },
+    {
+      "id": "queso",
+      "es": "el queso",
+      "fr": "le fromage",
+      "emoji": "🧀"
+    },
+    {
+      "id": "leche",
+      "es": "la leche",
+      "fr": "le lait",
+      "emoji": "🥛"
+    },
+    {
+      "id": "huevos",
+      "es": "los huevos",
+      "fr": "les œufs",
+      "emoji": "🥚"
+    },
+    {
+      "id": "tomate",
+      "es": "el tomate",
+      "fr": "la tomate",
+      "emoji": "🍅"
+    },
+    {
+      "id": "zanahoria",
+      "es": "la zanahoria",
+      "fr": "la carotte",
+      "emoji": "🥕"
+    },
+    {
+      "id": "pescado",
+      "es": "el pescado",
+      "fr": "le poisson",
+      "emoji": "🐟"
+    },
+    {
+      "id": "mantequilla",
+      "es": "la mantequilla",
+      "fr": "le beurre",
+      "emoji": "🧈"
+    },
+    {
+      "id": "zumo",
+      "es": "el zumo",
+      "fr": "le jus",
+      "emoji": "🧃"
+    },
+    {
+      "id": "uvas",
+      "es": "las uvas",
+      "fr": "le raisin (les grains de raisin)",
+      "emoji": "🍇"
+    },
+    {
+      "id": "lechuga",
+      "es": "la lechuga",
+      "fr": "la salade verte, la laitue",
+      "emoji": "🥬"
+    },
+    {
+      "id": "pollo",
+      "es": "el pollo",
+      "fr": "le poulet",
+      "emoji": "🍗"
+    }
+  ],
+  "screens": [
+    {
+      "kind": "imageMap",
+      "title": {
+        "es": "Abre el frigorífico de Lucía",
+        "fr": "Ouvre le frigo de Lucía"
+      },
+      "shelves": [
+        [
+          "leche",
+          "queso",
+          "mantequilla",
+          "huevos"
+        ],
+        [
+          "manzana",
+          "uvas",
+          "zumo"
+        ],
+        [
+          "tomate",
+          "lechuga",
+          "zanahoria"
+        ],
+        [
+          "pescado",
+          "pollo"
+        ]
+      ]
+    },
+    {
+      "kind": "cards",
+      "title": {
+        "es": "Descubre las palabras",
+        "fr": "Découvre les mots"
+      },
+      "items": [
+        "manzana",
+        "queso",
+        "leche",
+        "huevos",
+        "tomate",
+        "zanahoria",
+        "pescado",
+        "mantequilla",
+        "zumo",
+        "uvas",
+        "lechuga",
+        "pollo"
+      ]
+    },
+    {
+      "kind": "recognize",
+      "title": {
+        "es": "¿Qué palabra es?",
+        "fr": "Quel est le mot ?"
+      },
+      "items": [
+        "manzana",
+        "queso",
+        "leche",
+        "huevos",
+        "tomate",
+        "zanahoria",
+        "pescado",
+        "mantequilla",
+        "zumo",
+        "uvas",
+        "lechuga",
+        "pollo"
+      ]
+    },
+    {
+      "kind": "match",
+      "title": {
+        "es": "Une cada imagen con su palabra",
+        "fr": "Associe chaque image à son mot"
+      },
+      "pairs": [
+        {
+          "left": {
+            "img": "🍎",
+            "alt": "imagen: manzana"
+          },
+          "right": "la manzana"
+        },
+        {
+          "left": {
+            "img": "🧀",
+            "alt": "imagen: queso"
+          },
+          "right": "el queso"
+        },
+        {
+          "left": {
+            "img": "🥚",
+            "alt": "imagen: huevos"
+          },
+          "right": "los huevos"
+        },
+        {
+          "left": {
+            "img": "🐟",
+            "alt": "imagen: pescado"
+          },
+          "right": "el pescado"
+        },
+        {
+          "left": {
+            "img": "🥕",
+            "alt": "imagen: zanahoria"
+          },
+          "right": "la zanahoria"
+        }
+      ]
+    },
+    {
+      "kind": "classify",
+      "title": {
+        "es": "Pon cada alimento en su estante",
+        "fr": "Range chaque aliment sur la bonne étagère"
+      },
+      "categories": [
+        {
+          "id": "fv",
+          "label": {
+            "es": "Frutas y verduras",
+            "fr": "Fruits et légumes"
+          }
+        },
+        {
+          "id": "dairy",
+          "label": {
+            "es": "Lácteos y huevos",
+            "fr": "Produits laitiers et œufs"
+          }
+        },
+        {
+          "id": "meat",
+          "label": {
+            "es": "Carne y pescado",
+            "fr": "Viande et poisson"
+          }
+        }
+      ],
+      "items": [
+        {
+          "text": "la manzana",
+          "cat": "fv"
+        },
+        {
+          "text": "el tomate",
+          "cat": "fv"
+        },
+        {
+          "text": "la lechuga",
+          "cat": "fv"
+        },
+        {
+          "text": "las uvas",
+          "cat": "fv"
+        },
+        {
+          "text": "el queso",
+          "cat": "dairy"
+        },
+        {
+          "text": "la leche",
+          "cat": "dairy"
+        },
+        {
+          "text": "los huevos",
+          "cat": "dairy"
+        },
+        {
+          "text": "la mantequilla",
+          "cat": "dairy"
+        },
+        {
+          "text": "el pescado",
+          "cat": "meat"
+        },
+        {
+          "text": "el pollo",
+          "cat": "meat"
+        }
+      ],
+      "hint": {
+        "es": "Piensa: ¿viene de una planta, de un animal o de la leche?",
+        "fr": "Pense : est-ce que ça vient d'une plante, d'un animal ou du lait ?"
+      },
+      "explain": {
+        "es": "Frutas y verduras vienen de plantas. Lácteos: leche, queso, mantequilla (y los huevos van con ellos en la nevera). Carne y pescado: animales.",
+        "fr": "Fruits et légumes viennent de plantes. Produits laitiers : lait, fromage, beurre (et les œufs sont rangés avec eux). Viande et poisson : animaux."
+      }
+    },
+    {
+      "kind": "recall",
+      "title": {
+        "es": "Escríbela sin ayuda",
+        "fr": "Écris-le sans aide"
+      },
+      "items": [
+        "manzana",
+        "queso",
+        "leche",
+        "huevos",
+        "tomate",
+        "zanahoria",
+        "pescado",
+        "mantequilla",
+        "zumo",
+        "uvas",
+        "lechuga",
+        "pollo"
+      ]
+    },
+    {
+      "kind": "fill",
+      "prompt": {
+        "es": "Quiero comprar tres ___.",
+        "fr": "Je veux acheter trois pommes."
+      },
+      "answers": [
+        "manzanas"
+      ],
+      "hint": {
+        "es": "Después de «tres», la palabra va en plural: añade -s.",
+        "fr": "Après « tres », le mot est au pluriel : ajoute -s."
+      },
+      "explain": {
+        "es": "tres + plural: una manzana → tres manzanas.",
+        "fr": "tres + pluriel : una manzana → tres manzanas."
+      }
+    },
+    {
+      "kind": "fill",
+      "prompt": {
+        "es": "Para hacer una tortilla necesito seis ___.",
+        "fr": "Pour faire une omelette, il me faut six œufs."
+      },
+      "answers": [
+        "huevos"
+      ],
+      "hint": {
+        "es": "Piensa en la tortilla: ¿qué ingrediente es básico?",
+        "fr": "Pense à l'omelette : quel ingrédient est indispensable ?"
+      },
+      "explain": {
+        "es": "seis + plural: un huevo → seis huevos.",
+        "fr": "six + pluriel : un huevo → seis huevos."
+      }
+    },
+    {
+      "kind": "fill",
+      "prompt": {
+        "es": "El conejo de los dibujos animados come una ___.",
+        "fr": "Le lapin des dessins animés mange une carotte."
+      },
+      "answers": [
+        "zanahoria"
+      ],
+      "hint": {
+        "es": "Es naranja y es una verdura.",
+        "fr": "Elle est orange et c'est un légume."
+      }
+    },
+    {
+      "kind": "fill",
+      "prompt": {
+        "es": "En la ensalada pongo tomate y ___.",
+        "fr": "Dans la salade, je mets de la tomate et de la laitue."
+      },
+      "answers": [
+        "lechuga",
+        "zanahoria",
+        "zanahorias"
+      ],
+      "hint": {
+        "es": "Es verde y se come cruda.",
+        "fr": "Elle est verte et se mange crue."
+      },
+      "explain": {
+        "es": "Hay dos respuestas posibles aquí: lechuga o zanahoria.",
+        "fr": "Deux réponses sont possibles ici : lechuga ou zanahoria."
+      }
+    },
+    {
+      "kind": "recap",
+      "points": [
+        {
+          "es": "Conoces doce alimentos y su artículo (el, la, los, las).",
+          "fr": "Tu connais douze aliments et leur article (el, la, los, las)."
+        },
+        {
+          "es": "Sabes pasar de la imagen a la palabra, y de la palabra a la frase.",
+          "fr": "Tu sais passer de l'image au mot, puis du mot à la phrase."
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "es": "¡Misión cumplida! Ya sabes nombrar los alimentos de un frigorífico.",
+    "fr": "Mission accomplie ! Tu sais nommer les aliments d'un frigo.",
+    "review": [],
+    "next": [
+      "m-desayuno-madrid"
+    ]
+  }
+}

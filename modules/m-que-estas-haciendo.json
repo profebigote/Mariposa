@@ -1,0 +1,512 @@
+{
+  "id": "m-que-estas-haciendo",
+  "type": "lesson",
+  "title": "¿Qué estás haciendo?",
+  "rubrique": "gramatica",
+  "theme": "Le gérondif (estar + gerundio)",
+  "level": "A2",
+  "duration": 8,
+  "status": "brouillon",
+  "version": 1,
+  "objectives": {
+    "main": "Formar el gerundio y usar «estar + gerundio» para decir lo que pasa ahora.",
+    "secondary": [
+      "Distinguir -ando e -iendo",
+      "Conocer algunos gerundios irregulares frecuentes",
+      "Diferenciar hábito y acción en curso"
+    ],
+    "outcome": "decir lo que estás haciendo, o lo que hacen otras personas, en este momento.",
+    "lexicon": [
+      "hablando",
+      "comiendo",
+      "viviendo",
+      "leyendo",
+      "durmiendo",
+      "estoy / estás / está / estamos / estáis / están"
+    ],
+    "grammar": [
+      "Gerundio regular (-ando, -iendo)",
+      "estar + gerundio",
+      "Gerundios con cambio (leyendo, durmiendo, pidiendo)"
+    ],
+    "prerequisites": [
+      "Presente de estar"
+    ]
+  },
+  "skills": [
+    "estar-gerundio"
+  ],
+  "intro": {
+    "es": "Una llamada de teléfono: «¿Qué estás haciendo?» Vamos a aprender a contestar.",
+    "fr": "Un appel téléphonique : « ¿Qué estás haciendo? » Apprenons à répondre."
+  },
+  "screens": [
+    {
+      "kind": "observe",
+      "title": {
+        "es": "Mira estas frases",
+        "fr": "Regarde ces phrases"
+      },
+      "examples": [
+        {
+          "es": "Marta está comiendo una pizza.",
+          "fr": "Marta est en train de manger une pizza.",
+          "img": "🍕",
+          "highlight": [
+            "comiendo"
+          ]
+        },
+        {
+          "es": "Pablo está leyendo un libro.",
+          "fr": "Pablo est en train de lire un livre.",
+          "img": "📖",
+          "highlight": [
+            "leyendo"
+          ]
+        },
+        {
+          "es": "Estamos escuchando música.",
+          "fr": "Nous sommes en train d'écouter de la musique.",
+          "img": "🎧",
+          "highlight": [
+            "escuchando"
+          ]
+        }
+      ],
+      "question": {
+        "es": "¿Qué tienen en común las palabras marcadas?",
+        "fr": "Qu'ont en commun les mots surlignés ?"
+      },
+      "conclusion": {
+        "es": "Acaban en -ando o -iendo: es el gerundio. Sirve para decir lo que está pasando ahora.",
+        "fr": "Ils finissent en -ando ou -iendo : c'est le gérondif. Il sert à dire ce qui se passe en ce moment."
+      }
+    },
+    {
+      "kind": "schema",
+      "title": {
+        "es": "Los verbos en -AR → -ANDO",
+        "fr": "Les verbes en -AR → -ANDO"
+      },
+      "intro": {
+        "es": "Toca cada verbo: la terminación del infinitivo desaparece y llega la nueva.",
+        "fr": "Touche chaque verbe : la terminaison de l'infinitif disparaît et la nouvelle arrive."
+      },
+      "rows": [
+        {
+          "stem": "habl",
+          "from": "ar",
+          "to": "ando",
+          "fr": "parler"
+        },
+        {
+          "stem": "cant",
+          "from": "ar",
+          "to": "ando",
+          "fr": "chanter"
+        },
+        {
+          "stem": "trabaj",
+          "from": "ar",
+          "to": "ando",
+          "fr": "travailler"
+        },
+        {
+          "stem": "bail",
+          "from": "ar",
+          "to": "ando",
+          "fr": "danser"
+        }
+      ]
+    },
+    {
+      "kind": "schema",
+      "title": {
+        "es": "Los verbos en -ER / -IR → -IENDO",
+        "fr": "Les verbes en -ER / -IR → -IENDO"
+      },
+      "intro": {
+        "es": "Los verbos en -ER y en -IR hacen lo mismo: terminan en -iendo.",
+        "fr": "Les verbes en -ER et en -IR font pareil : ils finissent en -iendo."
+      },
+      "rows": [
+        {
+          "stem": "com",
+          "from": "er",
+          "to": "iendo",
+          "fr": "manger"
+        },
+        {
+          "stem": "beb",
+          "from": "er",
+          "to": "iendo",
+          "fr": "boire"
+        },
+        {
+          "stem": "viv",
+          "from": "ir",
+          "to": "iendo",
+          "fr": "vivre"
+        },
+        {
+          "stem": "escrib",
+          "from": "ir",
+          "to": "iendo",
+          "fr": "écrire"
+        }
+      ]
+    },
+    {
+      "kind": "rule",
+      "title": {
+        "es": "Cuidado: algunos gerundios cambian",
+        "fr": "Attention : certains gérondifs changent"
+      },
+      "text": {
+        "es": "Con una vocal delante de la terminación, la «i» se convierte en «y». Y algunos verbos en -IR cambian la vocal del radical.",
+        "fr": "Quand une voyelle précède la terminaison, le « i » devient « y ». Et certains verbes en -IR changent la voyelle du radical."
+      },
+      "examples": [
+        {
+          "es": "leer → leyendo",
+          "fr": "lire"
+        },
+        {
+          "es": "oír → oyendo",
+          "fr": "entendre"
+        }
+      ],
+      "exceptions": [
+        {
+          "es": "dormir → durmiendo",
+          "fr": "o → u"
+        },
+        {
+          "es": "pedir → pidiendo",
+          "fr": "e → i"
+        },
+        {
+          "es": "decir → diciendo",
+          "fr": "e → i"
+        },
+        {
+          "es": "ir → yendo",
+          "fr": "aller"
+        }
+      ]
+    },
+    {
+      "kind": "match",
+      "title": {
+        "es": "Une cada infinitivo con su gerundio",
+        "fr": "Associe chaque infinitif à son gérondif"
+      },
+      "pairs": [
+        {
+          "left": "hablar",
+          "right": "hablando"
+        },
+        {
+          "left": "comer",
+          "right": "comiendo"
+        },
+        {
+          "left": "vivir",
+          "right": "viviendo"
+        },
+        {
+          "left": "trabajar",
+          "right": "trabajando"
+        },
+        {
+          "left": "beber",
+          "right": "bebiendo"
+        }
+      ]
+    },
+    {
+      "kind": "transform",
+      "prompt": {
+        "es": "escribir → ___",
+        "fr": "écrire → ___"
+      },
+      "answers": [
+        "escribiendo"
+      ],
+      "hint": {
+        "es": "Es un verbo en -IR: ¿qué terminación necesita?",
+        "fr": "C'est un verbe en -IR : quelle terminaison lui faut-il ?"
+      },
+      "explain": {
+        "es": "escrib-ir → escrib-iendo. Los verbos en -IR acaban en -iendo.",
+        "fr": "escrib-ir → escrib-iendo. Les verbes en -IR finissent en -iendo."
+      },
+      "errorKind": "grammar"
+    },
+    {
+      "kind": "formula",
+      "title": {
+        "es": "La fórmula",
+        "fr": "La formule"
+      },
+      "parts": [
+        {
+          "role": "aux",
+          "text": "ESTAR",
+          "label": "conjugado"
+        },
+        {
+          "text": "+"
+        },
+        {
+          "role": "gerund",
+          "text": "GERUNDIO",
+          "label": "verbo + -ando / -iendo"
+        }
+      ],
+      "example": {
+        "parts": [
+          {
+            "t": "Estoy ",
+            "role": "aux"
+          },
+          {
+            "t": "comiendo",
+            "role": "gerund"
+          }
+        ],
+        "fr": "Je suis en train de manger.",
+        "img": "🍝"
+      },
+      "note": {
+        "es": "estoy · estás · está · estamos · estáis · están",
+        "fr": "estoy · estás · está · estamos · estáis · están"
+      }
+    },
+    {
+      "kind": "match",
+      "title": {
+        "es": "Une la imagen con la frase",
+        "fr": "Associe l'image à la phrase"
+      },
+      "pairs": [
+        {
+          "left": {
+            "img": "🍝",
+            "alt": "imagen: una persona come"
+          },
+          "right": "Estoy comiendo."
+        },
+        {
+          "left": {
+            "img": "🏊",
+            "alt": "imagen: una persona nada"
+          },
+          "right": "Está nadando."
+        },
+        {
+          "left": {
+            "img": "📖",
+            "alt": "imagen: dos personas leen"
+          },
+          "right": "Están leyendo."
+        },
+        {
+          "left": {
+            "img": "🎧",
+            "alt": "imagen: nosotros escuchamos música"
+          },
+          "right": "Estamos escuchando música."
+        }
+      ]
+    },
+    {
+      "kind": "contrast",
+      "title": {
+        "es": "¿Hábito o ahora mismo?",
+        "fr": "Habitude ou à l'instant ?"
+      },
+      "columns": [
+        {
+          "title": {
+            "es": "Hábito",
+            "fr": "Habitude"
+          },
+          "badge": "presente",
+          "items": [
+            {
+              "es": "Como pan todos los días.",
+              "fr": "Je mange du pain tous les jours."
+            },
+            {
+              "es": "Normalmente estudio por la tarde.",
+              "fr": "En général, j'étudie l'après-midi."
+            }
+          ]
+        },
+        {
+          "title": {
+            "es": "Ahora mismo",
+            "fr": "En ce moment même"
+          },
+          "badge": "estar + gerundio",
+          "items": [
+            {
+              "es": "Estoy comiendo pan.",
+              "fr": "Je suis en train de manger du pain."
+            },
+            {
+              "es": "Ahora estoy estudiando.",
+              "fr": "En ce moment, j'étudie."
+            }
+          ]
+        }
+      ],
+      "note": {
+        "es": "En español, el presente simple también puede hablar del ahora («¿Qué haces?»). Con «estar + gerundio» insistes en que la acción está en curso.",
+        "fr": "En espagnol, le présent simple peut aussi parler de l'instant présent (« ¿Qué haces? »). Avec « estar + gerundio », tu insistes sur le fait que l'action est en cours."
+      }
+    },
+    {
+      "kind": "build",
+      "prompt": {
+        "es": "Construye la frase: « Nous dînons à la maison. »",
+        "fr": "Construis la phrase : « Nous dînons à la maison. »"
+      },
+      "accept": [
+        "Estamos cenando en casa"
+      ],
+      "extra": [
+        "cenamos",
+        "cenar"
+      ],
+      "hint": {
+        "es": "Necesitas ESTAR (nosotros) + gerundio de «cenar».",
+        "fr": "Il te faut ESTAR (nosotros) + le gérondif de « cenar »."
+      },
+      "explain": {
+        "es": "estamos (estar, nosotros) + cen-ando (cenar → -ando).",
+        "fr": "estamos (estar, nosotros) + cen-ando (cenar → -ando)."
+      },
+      "solution": {
+        "es": "Estamos cenando en casa.",
+        "fr": "Nous sommes en train de dîner à la maison."
+      },
+      "errorKind": "grammar"
+    },
+    {
+      "kind": "build",
+      "prompt": {
+        "es": "Construye la frase: « Ils sont en train de jouer au foot. »",
+        "fr": "Construis la phrase : « Ils sont en train de jouer au foot. »"
+      },
+      "tiles": [
+        "Ellos",
+        "están",
+        "jugando",
+        "al",
+        "fútbol"
+      ],
+      "extra": [
+        "juegan",
+        "jugar"
+      ],
+      "accept": [
+        "Están jugando al fútbol",
+        "Ellos están jugando al fútbol"
+      ],
+      "hint": {
+        "es": "«Están» + gerundio de «jugar». Puedes empezar con «Ellos» o sin sujeto.",
+        "fr": "« Están » + gérondif de « jugar ». Tu peux commencer par « Ellos » ou sans sujet."
+      },
+      "explain": {
+        "es": "están (estar, ellos) + jug-ando. En español el sujeto se puede omitir.",
+        "fr": "están (estar, ellos) + jug-ando. En espagnol, le sujet peut être omis."
+      },
+      "solution": {
+        "es": "Están jugando al fútbol.",
+        "fr": "Ils sont en train de jouer au foot."
+      },
+      "errorKind": "grammar"
+    },
+    {
+      "kind": "fill",
+      "prompt": {
+        "es": "—¿Qué haces? —Estoy ___ para el examen. (estudiar)",
+        "fr": "— Que fais-tu ? — Je suis en train de réviser pour l'examen. (estudiar)"
+      },
+      "answers": [
+        "estudiando"
+      ],
+      "hint": {
+        "es": "Verbo en -AR: quita -ar y añade -ando.",
+        "fr": "Verbe en -AR : enlève -ar et ajoute -ando."
+      },
+      "explain": {
+        "es": "estudi-ar → estudi-ando.",
+        "fr": "estudi-ar → estudi-ando."
+      },
+      "errorKind": "grammar"
+    },
+    {
+      "kind": "dialogue",
+      "title": {
+        "es": "Una llamada",
+        "fr": "Un appel"
+      },
+      "scene": "home",
+      "dialogues": [
+        {
+          "title": "Una llamada",
+          "lines": [
+            {
+              "who": "Pablo",
+              "t": "¡Hola, Marta! ¿Qué estás {{haciendo::faisant::hacer|hecho}}?",
+              "fr": "Salut Marta ! Qu'est-ce que tu es en train de faire ?"
+            },
+            {
+              "who": "Marta",
+              "t": "Estoy {{preparando::préparant::preparar|preparado}} la cena.",
+              "fr": "Je suis en train de préparer le dîner."
+            },
+            {
+              "who": "Pablo",
+              "t": "¿Y tu hermano? ¿Está {{cocinando::cuisinant::cocinar|cocinado}} contigo?",
+              "fr": "Et ton frère ? Il cuisine avec toi ?"
+            },
+            {
+              "who": "Marta",
+              "t": "No, está {{durmiendo::dormant::dormiendo|dormir}} en el sofá.",
+              "fr": "Non, il est en train de dormir sur le canapé."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "recap",
+      "points": [
+        {
+          "es": "Gerundio: -ar → -ando · -er / -ir → -iendo.",
+          "fr": "Gérondif : -ar → -ando · -er / -ir → -iendo."
+        },
+        {
+          "es": "Fórmula: estar (conjugado) + gerundio.",
+          "fr": "Formule : estar (conjugué) + gérondif."
+        },
+        {
+          "es": "Atención a leyendo, durmiendo, pidiendo…",
+          "fr": "Attention à leyendo, durmiendo, pidiendo…"
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "es": "¡Misión cumplida! Ya sabes decir lo que estás haciendo ahora mismo.",
+    "fr": "Mission accomplie ! Tu sais dire ce que tu es en train de faire.",
+    "review": [],
+    "next": [
+      "m-dia-vida"
+    ]
+  }
+}
