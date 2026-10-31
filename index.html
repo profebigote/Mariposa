@@ -3,22 +3,46 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Español en marcha</title>
+  <title>Proyecto Mariposa</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/mariposa.css">
 </head>
 <body>
   <div class="topbar">
-    <button class="brand" id="brand" type="button">Español <span>en marcha</span></button>
-    <div class="topnav"><button class="btn small" id="explore-btn" type="button">À explorer à mon rythme</button></div>
+    <button class="brand" id="brand" type="button" aria-label="Proyecto Mariposa : accueil"><span class="brandMark" aria-hidden="true">🦋</span>Proyecto <span>Mariposa</span></button>
+    <div class="topnav">
+      <button class="btn small" id="prog-btn" type="button">Mi progreso</button>
+      <button class="btn small" id="explore-btn" type="button">Mis palabras por revisar</button>
+      <button class="btn small" id="settings-btn" type="button" aria-label="Ajustes · Réglages">⚙</button>
+    </div>
   </div>
   <main class="wrap" id="app"></main>
+
+  <!-- noyau -->
   <script src="js/engine.js"></script>
   <script src="js/store.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/feedback.js"></script>
+  <script src="js/validator.js"></script>
+  <script src="js/loader.js"></script>
+  <!-- données éditables -->
+  <script src="data/config.js"></script>
+  <script src="data/messages.js"></script>
+  <script src="data/skills.js"></script>
+  <script src="data/butterfly.js"></script>
   <script src="js/content.js"></script>
+  <!-- interface -->
   <script src="js/comic.js"></script>
+  <script src="js/activities.js"></script>
+  <script src="js/butterfly.js"></script>
+  <script src="js/progressui.js"></script>
+  <script src="js/runner.js"></script>
+  <script src="js/importer.js"></script>
+  <script src="js/atelier.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

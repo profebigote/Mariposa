@@ -1,0 +1,402 @@
+{
+  "id": "m-como-soy",
+  "type": "lesson",
+  "title": "¿Cómo soy?",
+  "rubrique": "palabras",
+  "theme": "Traits de caractère et nuances",
+  "level": "A2",
+  "duration": 7,
+  "status": "brouillon",
+  "version": 1,
+  "objectives": {
+    "main": "Describir el carácter de una persona con adjetivos precisos.",
+    "secondary": [
+      "Deducir el sentido de un adjetivo por la situación",
+      "Distinguir carácter (ser) y estado (estar)",
+      "Acordar el adjetivo con el género"
+    ],
+    "outcome": "describirte a ti mismo/a y a otras personas con matices.",
+    "lexicon": [
+      "despistado/a",
+      "cariñoso/a",
+      "responsable",
+      "tímido/a",
+      "generoso/a",
+      "nervioso/a"
+    ],
+    "grammar": [
+      "ser + carácter · estar + estado",
+      "Concordancia del adjetivo (-o / -a)"
+    ],
+    "prerequisites": [
+      "Presente de ser y estar"
+    ]
+  },
+  "skills": [
+    "describir-caracter"
+  ],
+  "intro": {
+    "es": "¿Cómo es una persona por dentro? Vas a deducir el sentido de las palabras con situaciones.",
+    "fr": "Comment est une personne à l'intérieur ? Tu vas déduire le sens des mots grâce à des situations."
+  },
+  "screens": [
+    {
+      "kind": "observe",
+      "title": {
+        "es": "¿Cómo son?",
+        "fr": "Comment sont-ils ?"
+      },
+      "examples": [
+        {
+          "es": "Lucía siempre llega tarde y olvida las llaves. Es muy despistada.",
+          "fr": "Lucía arrive toujours en retard et oublie ses clés.",
+          "img": "🔑",
+          "highlight": [
+            "despistada"
+          ]
+        },
+        {
+          "es": "Mi abuelo me da abrazos y me llama «cariño». Es muy cariñoso.",
+          "fr": "Mon grand-père me fait des câlins et m'appelle « cariño ».",
+          "img": "🤗",
+          "highlight": [
+            "cariñoso"
+          ]
+        },
+        {
+          "es": "Álex hace los deberes a tiempo y cuida a su hermano. Es muy responsable.",
+          "fr": "Álex fait ses devoirs à temps et s'occupe de son frère.",
+          "img": "📚",
+          "highlight": [
+            "responsable"
+          ]
+        }
+      ],
+      "question": {
+        "es": "Mira lo que hace cada persona. ¿Qué crees que significa cada adjetivo?",
+        "fr": "Regarde ce que fait chaque personne. Que crois-tu que chaque adjectif signifie ?"
+      },
+      "conclusion": {
+        "es": "despistado = distrait · cariñoso = affectueux · responsable = responsable, sérieux.",
+        "fr": "despistado = distrait · cariñoso = affectueux · responsable = responsable, sérieux."
+      }
+    },
+    {
+      "kind": "match",
+      "title": {
+        "es": "Une cada adjetivo con una situación",
+        "fr": "Associe chaque adjectif à une situation"
+      },
+      "pairs": [
+        {
+          "left": "despistado",
+          "right": "Pierde el móvil y las llaves."
+        },
+        {
+          "left": "cariñoso",
+          "right": "Da abrazos y dice cosas bonitas."
+        },
+        {
+          "left": "tímido",
+          "right": "Se pone rojo cuando habla en público."
+        },
+        {
+          "left": "generoso",
+          "right": "Comparte todo con sus amigos."
+        },
+        {
+          "left": "responsable",
+          "right": "Cumple lo que promete."
+        }
+      ]
+    },
+    {
+      "kind": "schema",
+      "title": {
+        "es": "Masculino → femenino",
+        "fr": "Masculin → féminin"
+      },
+      "intro": {
+        "es": "Los adjetivos en -o cambian a -a para hablar de una chica.",
+        "fr": "Les adjectifs en -o passent à -a pour parler d'une fille."
+      },
+      "rows": [
+        {
+          "stem": "cariños",
+          "from": "o",
+          "to": "a",
+          "fr": "affectueux → affectueuse"
+        },
+        {
+          "stem": "despistad",
+          "from": "o",
+          "to": "a",
+          "fr": "distrait → distraite"
+        },
+        {
+          "stem": "tímid",
+          "from": "o",
+          "to": "a",
+          "fr": "timide (m → f)"
+        }
+      ],
+      "note": {
+        "es": "Atención: «responsable» no cambia: un chico responsable, una chica responsable.",
+        "fr": "Attention : « responsable » ne change pas : un chico responsable, una chica responsable."
+      }
+    },
+    {
+      "kind": "contrast",
+      "title": {
+        "es": "¿Carácter o estado?",
+        "fr": "Caractère ou état du moment ?"
+      },
+      "columns": [
+        {
+          "title": {
+            "es": "Cómo es siempre",
+            "fr": "Comment il est en général"
+          },
+          "badge": "ser",
+          "items": [
+            {
+              "es": "Es nervioso.",
+              "fr": "Il est nerveux (de nature)."
+            },
+            {
+              "es": "Es muy tímida.",
+              "fr": "Elle est très timide."
+            }
+          ]
+        },
+        {
+          "title": {
+            "es": "Cómo está hoy",
+            "fr": "Comment il est aujourd'hui"
+          },
+          "badge": "estar",
+          "items": [
+            {
+              "es": "Está nervioso.",
+              "fr": "Il est nerveux (en ce moment)."
+            },
+            {
+              "es": "Hoy está muy contenta.",
+              "fr": "Aujourd'hui, elle est très contente."
+            }
+          ]
+        }
+      ],
+      "note": {
+        "es": "Con algunos adjetivos el sentido cambia: «es aburrido» (c'est ennuyeux) / «está aburrido» (il s'ennuie).",
+        "fr": "Avec certains adjectifs, le sens change : « es aburrido » (c'est ennuyeux) / « está aburrido » (il s'ennuie)."
+      }
+    },
+    {
+      "kind": "choice",
+      "prompt": {
+        "es": "Pablo siempre dice «sí, claro» y luego olvida todo: pierde el móvil y la cartera. ¿Cómo es Pablo?",
+        "fr": "Pablo dit toujours « oui, bien sûr » puis oublie tout : il perd son téléphone et son portefeuille. Comment est Pablo ?"
+      },
+      "options": [
+        {
+          "text": "Es despistado.",
+          "ok": true
+        },
+        {
+          "text": "Es cariñoso.",
+          "ok": false,
+          "errorKind": "meaning"
+        },
+        {
+          "text": "Es tímido.",
+          "ok": false,
+          "errorKind": "meaning"
+        },
+        {
+          "text": "Es generoso.",
+          "ok": false,
+          "errorKind": "meaning"
+        }
+      ],
+      "hint": {
+        "es": "Fíjate en lo que olvida y pierde.",
+        "fr": "Fais attention à ce qu'il oublie et perd."
+      },
+      "explain": {
+        "es": "Pierde y olvida cosas todo el tiempo: es despistado.",
+        "fr": "Il perd et oublie tout le temps : il est despistado."
+      }
+    },
+    {
+      "kind": "choice",
+      "prompt": {
+        "es": "Hoy, antes del examen, Marta se muerde las uñas. ¿Qué frase es la mejor?",
+        "fr": "Aujourd'hui, avant l'examen, Marta se ronge les ongles. Quelle phrase est la meilleure ?"
+      },
+      "options": [
+        {
+          "text": "Hoy Marta está nerviosa.",
+          "ok": true
+        },
+        {
+          "text": "Hoy Marta es nerviosa.",
+          "ok": false,
+          "errorKind": "grammar",
+          "hint": {
+            "es": "«Hoy» indica un momento, no el carácter de siempre.",
+            "fr": "« Hoy » indique un moment, pas le caractère habituel."
+          }
+        },
+        {
+          "text": "Hoy Marta estás nerviosa.",
+          "ok": false,
+          "errorKind": "grammar",
+          "hint": {
+            "es": "Mira el verbo: ¿tú o ella?",
+            "fr": "Regarde le verbe : tú ou ella ?"
+          }
+        }
+      ],
+      "explain": {
+        "es": "Es un estado de hoy: estar. Y «Marta» = ella → está.",
+        "fr": "C'est un état d'aujourd'hui : estar. Et « Marta » = ella → está."
+      }
+    },
+    {
+      "kind": "fill",
+      "prompt": {
+        "es": "Mi hermana ___ muy generosa: siempre comparte su comida.",
+        "fr": "Ma sœur est très généreuse : elle partage toujours sa nourriture."
+      },
+      "answers": [
+        "es"
+      ],
+      "hint": {
+        "es": "«Siempre» → es su carácter. ¿ser o estar?",
+        "fr": "« Siempre » → c'est son caractère. ser ou estar ?"
+      },
+      "explain": {
+        "es": "Carácter de siempre → ser: ella es.",
+        "fr": "Caractère habituel → ser : ella es."
+      },
+      "errorKind": "grammar"
+    },
+    {
+      "kind": "fill",
+      "prompt": {
+        "es": "Hoy mi hermana ___ muy cansada.",
+        "fr": "Aujourd'hui, ma sœur est très fatiguée."
+      },
+      "answers": [
+        "está"
+      ],
+      "hint": {
+        "es": "«Hoy» → estado del momento: ¿ser o estar?",
+        "fr": "« Hoy » → état du moment : ser ou estar ?"
+      },
+      "explain": {
+        "es": "Estado de hoy → estar: ella está.",
+        "fr": "État d'aujourd'hui → estar : ella está."
+      },
+      "errorKind": "grammar"
+    },
+    {
+      "kind": "build",
+      "prompt": {
+        "es": "Construye la frase: « Mon meilleur ami est très affectueux et responsable. »",
+        "fr": "Construis la phrase : « Mon meilleur ami est très affectueux et responsable. »"
+      },
+      "accept": [
+        "Mi mejor amigo es muy cariñoso y responsable",
+        "Mi mejor amigo es muy responsable y cariñoso"
+      ],
+      "extra": [
+        "está",
+        "tímido"
+      ],
+      "hint": {
+        "es": "Es un rasgo de carácter: ser. Dos adjetivos unidos por «y».",
+        "fr": "C'est un trait de caractère : ser. Deux adjectifs reliés par « y »."
+      },
+      "explain": {
+        "es": "Puedes decir «cariñoso y responsable» o «responsable y cariñoso».",
+        "fr": "Tu peux dire « cariñoso y responsable » ou « responsable y cariñoso »."
+      },
+      "solution": {
+        "es": "Mi mejor amigo es muy cariñoso y responsable.",
+        "fr": "Mon meilleur ami est très affectueux et responsable."
+      },
+      "errorKind": "grammar"
+    },
+    {
+      "kind": "react",
+      "title": {
+        "es": "¿Y tú?",
+        "fr": "Et toi ?"
+      },
+      "prompt": {
+        "es": "Escribe dos frases para describirte: tu carácter de siempre y cómo estás hoy.",
+        "fr": "Écris deux phrases pour te décrire : ton caractère habituel et ton état d'aujourd'hui."
+      },
+      "model": {
+        "es": "Soy bastante tímido, pero muy responsable. Hoy estoy un poco cansado.",
+        "fr": "Je suis assez timide, mais très responsable. Aujourd'hui, je suis un peu fatigué."
+      },
+      "checklist": [
+        {
+          "es": "He usado «soy» o «es» para el carácter.",
+          "fr": "J'ai utilisé « soy » ou « es » pour le caractère."
+        },
+        {
+          "es": "He usado «estoy» o «está» para el estado de hoy.",
+          "fr": "J'ai utilisé « estoy » ou « está » pour l'état d'aujourd'hui."
+        }
+      ]
+    },
+    {
+      "kind": "recap",
+      "points": [
+        {
+          "es": "Para entender un adjetivo, mira lo que hace la persona.",
+          "fr": "Pour comprendre un adjectif, regarde ce que fait la personne."
+        },
+        {
+          "es": "ser = carácter de siempre · estar = estado de hoy.",
+          "fr": "ser = caractère habituel · estar = état du moment."
+        },
+        {
+          "es": "-o → -a para una chica; «responsable» no cambia.",
+          "fr": "-o → -a pour une fille ; « responsable » ne change pas."
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "es": "¡Misión cumplida! Ya sabes describir el carácter de una persona con matices.",
+    "fr": "Mission accomplie ! Tu sais décrire le caractère d'une personne avec des nuances.",
+    "review": [
+      {
+        "id": "despistado",
+        "es": "despistado/a",
+        "fr": "distrait(e)",
+        "emoji": "🔑"
+      },
+      {
+        "id": "cariñoso",
+        "es": "cariñoso/a",
+        "fr": "affectueux(se)",
+        "emoji": "🤗"
+      },
+      {
+        "id": "responsable",
+        "es": "responsable",
+        "fr": "responsable",
+        "emoji": "📚"
+      }
+    ],
+    "next": [
+      "m-descubriendo-colombia"
+    ]
+  }
+}

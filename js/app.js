@@ -3,62 +3,29 @@
   'use strict';
   const { C, E, S } = window.ESP;
   const app = document.getElementById('app');
+  app.append = function () { return Element.prototype.append.apply(this, Array.prototype.filter.call(arguments, (x) => x != null && x !== false)); };
   const unitsById = {}; C.units.forEach((u) => { unitsById[u.id] = u; });
   const catsById = {}; C.categories.forEach((c) => { catsById[c.id] = c; });
 
-  /* ───────── utilitaires ───────── */
-  function h(tag, attrs, ...kids) {
-    const el = document.createElement(tag);
-    Object.keys(attrs || {}).forEach((k) => {
-      const v = attrs[k];
-      if (v == null || v === false) return;
-      if (k === 'class') el.className = v;
-      else if (k === 'html') el.innerHTML = v;
-      else if (k.slice(0, 2) === 'on') el.addEventListener(k.slice(2), v);
-      else el.setAttribute(k, v === true ? '' : v);
-    });
-    kids.flat(Infinity).forEach((c) => { if (c == null || c === false) return; el.append(c.nodeType ? c : document.createTextNode(String(c))); });
-    return el;
-  }
-  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-  const pick = (a) => a[Math.floor(Math.random() * a.length)];
-  const fmt = (n) => String(Math.round(n * 100) / 100).replace('.', ',');
-  const canSpeak = 'speechSynthesis' in window;
-  function speak(t) {
-    try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = 'es-ES'; u.rate = 0.9; speechSynthesis.speak(u); } catch (e) { /* pas de voix */ }
-  }
-  const sndBtn = (t) => (canSpeak ? h('button', { class: 'snd', type: 'button', 'aria-label': 'Écouter', title: 'Écouter', onclick: () => speak(t) }, '🔊') : null);
+  /* ───────── utilitaires (js/util.js) ───────── */
+  const { h, esc, shuffle, pick, fmt, canSpeak, speak, sndBtn, accentBar } = window.ESP.Util;
+  const F = window.ESP.Feedback;
   const key = (unit, local) => unit.id + '|' + local;
 
   /* ───────── navigation (sans changer l'adresse) ───────── */
   function go(state) { history.pushState(state, ''); render(state); }
   window.addEventListener('popstate', (e) => render(e.state || { v: 'home' }));
 
-  function render(st) {
+  let render = function (st) {
     st = st || { v: 'home' };
     app.innerHTML = '';
     window.scrollTo(0, 0);
-    const views = { home, cat, unit, flash, train, dialogues, test, explore, comic, bdquiz, order };
+    const views = { home, cat, unit, flash, train, dialogues, test, explore, comic, bdquiz, order, rub, mod, prog, settings, atelier };
     (views[st.v] || home)(st);
     updateExploreCount();
-  }
+  };
 
   /* ───────── éléments communs ───────── */
-  let lastInput = null;
-  document.addEventListener('focusin', (e) => { if (e.target.matches('input.txt, input.inline, textarea.txt')) lastInput = e.target; });
-  function accentBar() {
-    return h('div', { class: 'accents', role: 'group', 'aria-label': 'Caractères espagnols' },
-      ['á', 'é', 'í', 'ó', 'ú', 'ñ', 'ü', '¿', '¡'].map((ch) => h('button', {
-        type: 'button', 'aria-label': 'Insérer ' + ch,
-        onmousedown: (e) => e.preventDefault(),
-        onclick: () => {
-          const el = lastInput; if (!el) return;
-          el.focus(); el.setRangeText(ch, el.selectionStart, el.selectionEnd, 'end');
-          el.dispatchEvent(new Event('input', { bubbles: true }));
-        }
-      }, ch)));
-  }
   function meter(unit) {
     const st = S.stage(unit.id, unitTotal(unit));
     const labels = ['Pas encore commencé', 'Découvert', 'En cours', 'Bien installé'];
@@ -81,28 +48,147 @@
   function updateExploreCount() {
     const n = S.exploreList().length;
     const b = document.getElementById('explore-btn');
-    if (b) b.textContent = 'À explorer à mon rythme' + (n ? ' (' + n + ')' : '');
+    if (b) b.textContent = 'Mis palabras por revisar' + (n ? ' (' + n + ')' : '');
+  }
+
+  /* ───────── modules : aides communes ───────── */
+  const CFG = window.ESP.CONFIG, M = window.ESP.Modules, B = window.ESP.Butterfly;
+  const showDrafts = () => S.pref('showDrafts', CFG.showDraftsByDefault);
+  const visibleMods = () => M.visible(showDrafts());
+  const rubById = {}; CFG.rubriques.forEach((r) => { rubById[r.id] = r; });
+  const rubOfCat = (cat) => CFG.rubriques.filter((r) => r.legacyCats.indexOf(cat) > -1)[0] || CFG.rubriques[0];
+  const TYPE_LABEL = { adventure: 'Mini-aventure', lesson: 'Lección', vocab: 'Vocabulario', reading: 'Lectura' };
+  const TYPE_ICON = { adventure: '🗺️', lesson: '🧩', vocab: '🍎', reading: '📰' };
+  const LEVEL_ORDER = CFG.levels;
+  const normStatus = (s2) => String(s2 || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  function modCard(m) {
+    const rs = S.resume(m.id), ms = S.modState(m.id) || {};
+    const st = normStatus(m.status);
+    return h('button', { class: 'row modRow', type: 'button', onclick: () => go({ v: 'mod', id: m.id }) },
+      h('span', { class: 'mIco', 'aria-hidden': 'true' }, TYPE_ICON[m.type] || '•'),
+      h('span', { class: 't' }, h('strong', {}, m.title), h('small', {}, TYPE_LABEL[m.type] + (m.duration ? ' · ' + m.duration + ' min' : '') + (m.theme ? ' · ' + m.theme : ''))),
+      h('span', { class: 'tags' }, h('span', { class: 'pill' }, m.level),
+        st !== 'publie' ? h('span', { class: 'pill draft' }, st === 'brouillon' ? 'Borrador' : 'Validado') : null,
+        rs ? h('span', { class: 'pill resume' }, 'En curso') : (ms.done ? h('span', { class: 'pill done' }, '✓ Hecho') : null)));
   }
 
   /* ───────── accueil ───────── */
   function home() {
-    const sit = C.units.filter((u) => u.cat === 'situaciones');
+    const st = B.stage(); const info = window.ESP.BUTTERFLY.stages[st - 1];
+    const resumable = visibleMods().filter((m) => S.resume(m.id));
     app.append(
-      h('header', { class: 'hero' },
-        h('h1', {}, '¿Qué situación quieres practicar?'),
-        h('p', {}, 'Choisis une situation de la vie réelle, ou explore la grammaire, la conjugaison et le vocabulaire. Tu t’entraînes quand tu veux, à ton rythme.')),
-      h('div', { class: 'grid' }, sit.map((u) => h('button', { class: 'tile', type: 'button', onclick: () => go({ v: 'unit', id: u.id }) },
-        h('span', { class: 'ico', 'aria-hidden': 'true' }, u.icon || ''),
-        h('h3', {}, u.title), h('span', { class: 'meta' }, u.blurb), h('span', {}, h('span', { class: 'pill' }, u.level), ' ', meter(u))))),
-      h('div', { class: 'section-title' }, h('h2', {}, 'Toutes les rubriques')),
-      h('div', { class: 'grid' }, C.categories.filter((c) => c.id !== 'situaciones').map((c) => {
-        const n = C.units.filter((u) => u.cat === c.id).length;
-        return h('button', { class: 'tile' + (n ? '' : ' soon'), type: 'button', onclick: () => n && go({ v: 'cat', id: c.id }) },
-          h('h3', {}, c.title), h('span', { class: 'meta' }, c.desc), h('span', { class: 'note' }, n ? n + (n > 1 ? ' leçons' : ' leçon') : 'Bientôt'));
+      h('header', { class: 'hero homeHero' }, h('div', {},
+        h('h1', {}, '¿Qué quieres descubrir hoy?'),
+        h('p', {}, 'Des situations à vivre, des leçons visuelles, du vocabulaire illustré et des lectures. Quand tu veux, à ton rythme.')),
+        h('button', { class: 'miniBf', type: 'button', onclick: () => go({ v: 'prog' }), 'aria-label': 'Mi progreso : ' + info.name }, h('span', { class: 'bfSmall', html: B.svg(st, info.name) }), h('span', {}, h('strong', {}, 'Mariposa'), h('small', {}, info.fr)))),
+      resumable.length ? h('div', {}, h('div', { class: 'section-title' }, h('h2', {}, 'Retomar · Reprendre')), h('div', { class: 'list' }, resumable.map(modCard))) : null,
+      h('div', { class: 'section-title' }, h('h2', {}, 'Las rúbricas'), h('small', {}, 'Les rubriques')),
+      h('div', { class: 'grid' }, CFG.rubriques.map((r) => {
+        const nM = visibleMods().filter((m) => m.rubrique === r.id).length;
+        const nU = C.units.filter((u) => r.legacyCats.indexOf(u.cat) > -1).length;
+        const n = nM + nU;
+        return h('button', { class: 'tile' + (n ? '' : ' soon'), type: 'button', onclick: () => go({ v: 'rub', id: r.id }) },
+          h('span', { class: 'ico', 'aria-hidden': 'true' }, r.icon), h('h3', {}, r.title), h('span', { class: 'note' }, r.fr), h('span', { class: 'meta' }, r.desc),
+          h('span', { class: 'note' }, n ? n + (n > 1 ? ' contenus' : ' contenu') : 'Bientôt'));
       })));
   }
 
   /* ───────── rubrique ───────── */
+  function rub(st) {
+    const r = rubById[st.id];
+    app.append(crumbs([{ t: 'Accueil', go: { v: 'home' } }, { t: r.title }]), h('header', { class: 'hero' }, h('h1', {}, r.icon + ' ' + r.title), h('p', { class: 'note' }, r.fr), h('p', {}, r.desc)));
+    if (r.id === 'clase') classPanel();
+    const mods = visibleMods().filter((m) => m.rubrique === r.id).sort((a, b2) => LEVEL_ORDER.indexOf(a.level) - LEVEL_ORDER.indexOf(b2.level));
+    const units = C.units.filter((u) => r.legacyCats.indexOf(u.cat) > -1);
+    if (mods.length) app.append(h('div', { class: 'section-title' }, h('h2', {}, 'Módulos · Modules'), h('small', {}, 'Du plus simple au plus avancé')), h('div', { class: 'list' }, mods.map(modCard)));
+    if (units.length) app.append(h('div', { class: 'section-title' }, h('h2', {}, 'Lecciones clásicas · Leçons classiques')),
+      h('div', { class: 'list' }, units.map((u) => h('button', { class: 'row', type: 'button', onclick: () => go({ v: 'unit', id: u.id }) },
+        h('span', { class: 't' }, h('strong', {}, (u.icon ? u.icon + ' ' : '') + u.title), h('small', {}, u.blurb)), h('span', {}, h('span', { class: 'pill' }, u.level), ' ', meter(u))))));
+    if (!mods.length && !units.length) app.append(h('div', { class: 'card' }, h('p', {}, 'Pronto habrá contenidos aquí. · Des contenus arriveront bientôt ici.')));
+  }
+
+  /* ───────── Mi clase : code de classe défini par l'enseignant (aucune donnée envoyée) ───────── */
+  function classPanel() {
+    const code = S.pref('classCode', '');
+    const cl = CFG.classes.filter((c) => c.code === code)[0];
+    const box = h('div', { class: 'card stack' });
+    if (cl) {
+      box.append(h('h2', {}, cl.name), cl.note ? h('p', { class: 'note' }, cl.note) : null);
+      const mods = cl.modules.map((id) => M.byId[id]).filter((m) => m && M.isVisible(m, showDrafts()));
+      const units = (cl.units || []).map((id) => unitsById[id]).filter(Boolean);
+      if (mods.length) box.append(h('h3', {}, 'Para trabajar · À travailler'), h('div', { class: 'list' }, mods.map(modCard)));
+      if (units.length) box.append(h('h3', {}, 'Listas de clase · Listes de classe'), h('div', { class: 'list' }, units.map((u) => h('button', { class: 'row', type: 'button', onclick: () => go({ v: 'unit', id: u.id }) }, h('span', { class: 't' }, h('strong', {}, u.title), h('small', {}, u.blurb)), meter(u)))));
+      box.append(h('div', { class: 'actions' }, h('button', { class: 'btn small', type: 'button', onclick: () => { S.setPref('classCode', ''); render({ v: 'rub', id: 'clase' }); } }, 'Salir de la clase · Quitter la classe')));
+    } else {
+      const input = h('input', { class: 'txt', type: 'text', id: 'classCode', placeholder: 'Código de clase · Code de classe', autocapitalize: 'characters', autocomplete: 'off', 'aria-label': 'Code de classe' });
+      const msg = h('p', { class: 'softnote', role: 'status' });
+      const join = () => { const v = input.value.trim().toUpperCase(); if (CFG.classes.some((c) => c.code === v)) { S.setPref('classCode', v); render({ v: 'rub', id: 'clase' }); } else msg.textContent = 'Ese código no existe. Pregúntale a tu profesor/a. · Ce code n’existe pas. Demande-le à ton enseignant(e).'; };
+      input.addEventListener('keydown', (e) => { if (e.key === 'Enter') join(); });
+      box.append(h('h2', {}, 'Únete a tu clase · Rejoindre ma classe'), h('p', {}, 'Escribe el código que te ha dado tu profesor/a. · Saisis le code donné par ton enseignant(e).'), input,
+        h('div', { class: 'actions' }, h('button', { class: 'btn primary', type: 'button', onclick: join }, 'Unirme · Rejoindre')), msg,
+        h('p', { class: 'note' }, 'Tu profesor/a todavía no ve tus resultados: tu progreso se queda en este dispositivo. · Ton enseignant(e) ne voit pas encore tes résultats : ta progression reste sur cet appareil.'));
+    }
+    app.append(box);
+  }
+
+  /* ───────── un module : fiche, puis lecture ───────── */
+  function mod(st) {
+    const m = M.byId[st.id];
+    if (!m || !m._ok) { app.append(h('div', { class: 'card' }, h('p', {}, 'Módulo no disponible. · Module indisponible.'))); return; }
+    const r = rubById[m.rubrique];
+    app.append(crumbs([{ t: 'Accueil', go: { v: 'home' } }, { t: r.title, go: { v: 'rub', id: r.id } }, { t: m.title }]));
+    if (st.play) {
+      const mount = h('div', {}); app.append(h('header', { class: 'miniHead' }, h('strong', {}, m.title), h('span', { class: 'pill' }, m.level)), mount);
+      const R = window.ESP.Runner;
+      if (m.type === 'adventure') R.runAdventure(m, mount, go, st.resume ? S.resume(m.id) : null);
+      else R.runLinear(m, mount, go, st.resume && S.resume(m.id) ? (S.resume(m.id).pos || 0) : 0);
+      return;
+    }
+    const rs = S.resume(m.id); const ob = m.objectives || {}; const sk = (m.skills || []).map((id) => (window.ESP.SKILLS || []).filter((x) => x.id === id)[0]).filter(Boolean);
+    const stt = normStatus(m.status);
+    app.append(h('header', { class: 'hero' }, h('p', { class: 'eyebrow' }, TYPE_LABEL[m.type]), h('h1', {}, m.title),
+      h('p', {}, h('span', { class: 'pill' }, m.level), ' ', m.duration ? h('span', { class: 'pill' }, '≈ ' + m.duration + ' min') : null, ' ',
+        stt !== 'publie' ? h('span', { class: 'pill draft' }, stt === 'brouillon' ? 'Borrador · à relire' : 'Validado') : null),
+      m.intro ? h('p', {}, window.ESP.Util.tx(m.intro)) : null));
+    const card = h('div', { class: 'card stack' });
+    if (ob.main) card.append(h('div', {}, h('h3', {}, 'Objetivo · Objectif'), h('p', {}, ob.main), ob.outcome ? h('p', { class: 'note' }, 'Al final podrás: ' + ob.outcome) : null));
+    if ((ob.lexicon || []).length) card.append(h('div', {}, h('h3', {}, 'Vocabulario'), h('div', { class: 'chips' }, ob.lexicon.map((w) => h('span', { class: 'chipW' }, w)))));
+    if ((ob.grammar || []).length) card.append(h('div', {}, h('h3', {}, 'Gramática'), h('div', { class: 'chips' }, ob.grammar.map((w) => h('span', { class: 'chipW' }, w)))));
+    if (sk.length) card.append(h('div', {}, h('h3', {}, 'Competencias'), sk.map((x) => window.ESP.ProgressUI.skillRow(x, { compact: true }))));
+    const acts = h('div', { class: 'actions' });
+    if (rs) acts.append(h('button', { class: 'btn primary', type: 'button', onclick: () => go({ v: 'mod', id: m.id, play: 1, resume: 1 }) }, 'Retomar · Reprendre'),
+      h('button', { class: 'btn', type: 'button', onclick: () => { S.setResume(m.id, null); go({ v: 'mod', id: m.id, play: 1 }); } }, 'Empezar de nuevo · Recommencer'));
+    else acts.append(h('button', { class: 'btn primary', type: 'button', onclick: () => go({ v: 'mod', id: m.id, play: 1 }) }, 'Empezar · Commencer'));
+    card.append(acts); app.append(card);
+  }
+
+  function prog() { window.ESP.ProgressUI.view(app, go); }
+  function atelier() { if (window.ESP.Atelier) window.ESP.Atelier.view(app, go, { render, crumbs: crumbs([{ t: 'Accueil', go: { v: 'home' } }, { t: 'Ajustes', go: { v: 'settings' } }, { t: 'Atelier' }]) }); else app.append(h('p', {}, 'Atelier indisponible.')); }
+
+  /* ───────── réglages ───────── */
+  function settings() {
+    const tog = (label, sub, name, def, after) => {
+      const id = 'pref-' + name; const cur = S.pref(name, def);
+      return h('label', { class: 'prefRow', for: id }, h('input', { type: 'checkbox', id, checked: cur ? true : null, onchange: (e) => { S.setPref(name, e.target.checked); if (after) after(e.target.checked); } }), h('span', {}, h('strong', {}, label), h('small', {}, sub)));
+    };
+    const confirmBox = h('div', {});
+    app.append(crumbs([{ t: 'Accueil', go: { v: 'home' } }, { t: 'Ajustes' }]), h('header', { class: 'hero' }, h('h1', {}, 'Ajustes · Réglages')),
+      h('div', { class: 'card stack' },
+        tog('Ayuda en francés', 'Afficher la traduction française sous les textes espagnols.', 'showFr', true),
+        tog('Animaciones reducidas', 'Désactive les mouvements (papillon, schémas). Suit par défaut le réglage de ton appareil.', 'reduceMotion', B.reduceMotion(), () => B.applyMotionPref()),
+        tog('Mostrar los borradores (enseignant)', 'Affiche aussi les modules « brouillon » ou « validé », pour les relire.', 'showDrafts', CFG.showDraftsByDefault),
+        h('div', { class: 'actions' }, h('button', { class: 'btn', type: 'button', onclick: () => go({ v: 'atelier' }) }, 'Atelier enseignant'))),
+      h('div', { class: 'card stack' }, h('h3', {}, 'Mis datos · Mes données'),
+        h('p', { class: 'note' }, 'Ta progression est enregistrée uniquement dans ce navigateur. Aucune donnée personnelle n’est envoyée.'),
+        confirmBox,
+        h('div', { class: 'actions' }, h('button', { class: 'btn small', type: 'button', onclick: () => {
+          confirmBox.innerHTML = ''; confirmBox.append(h('div', { class: 'fb again' }, h('p', {}, 'Cela efface toute ta progression sur cet appareil, sans retour possible.'),
+            h('div', { class: 'actions' }, h('button', { class: 'btn', type: 'button', onclick: () => { S.reset(); render({ v: 'home' }); } }, 'Oui, tout effacer'), h('button', { class: 'btn primary', type: 'button', onclick: () => { confirmBox.innerHTML = ''; } }, 'Non, garder'))));
+        } }, 'Effacer ma progression'))));
+  }
+
+  /* ───────── rubrique historique (conservée) ───────── */
   function cat(st) {
     const c = catsById[st.id];
     app.append(crumbs([{ t: 'Accueil', go: { v: 'home' } }, { t: c.title }]),
@@ -117,7 +203,7 @@
   function unit(st) {
     const u = unitsById[st.id]; S.open(u.id);
     const c = catsById[u.cat];
-    app.append(crumbs([{ t: 'Accueil', go: { v: 'home' } }, { t: c.title, go: u.cat === 'situaciones' ? { v: 'home' } : { v: 'cat', id: c.id } }, { t: u.title }]),
+    app.append(crumbs([{ t: 'Accueil', go: { v: 'home' } }, { t: rubOfCat(u.cat).title, go: { v: 'rub', id: rubOfCat(u.cat).id } }, { t: u.title }]),
       h('header', { class: 'hero' }, h('h1', {}, (u.icon ? u.icon + ' ' : '') + u.title), h('p', {}, u.blurb), h('p', {}, h('span', { class: 'pill' }, u.level), ' ', meter(u))));
 
     // Parcours conseillé : l'ordre est une vraie progression (reconnaître, retenir, employer, restituer)
@@ -255,21 +341,14 @@
   function dialogues(st) { const u = unitsById[st.id]; S.open(u.id); session(u, buildTrain(u, 'dialogues'), 'Mini-dialogues', 'dialogues'); }
 
   /* ───────── retours bienveillants ───────── */
-  const FB = {
-    okFirst: ['¡Muy bien !', '¡Eso es !', 'Perfecto.', '¡Exacto !'],
-    okHelped: ['Tu l’as eu ! C’est comme ça qu’on retient.', '¡Lo lograste ! Chaque essai compte.', 'Voilà, tu y es arrivé(e).'],
-    almost: ['¡Casi !', '¡Casi, casi !', 'Presque !'],
-    wrong: ['Pas encore, mais tu y es presque.', 'Pas tout à fait. Regarde l’astuce ci-dessous.', 'On y est presque, courage.'],
-    wrongMany: ['¡Ánimo ! Encore un petit effort, tu vas y arriver.', '¡Tú puedes ! Tu peux relire la règle, ou voir la réponse et continuer.']
-  };
-
   function fbHtml(res, attempts, ex) {
-    let lead = '', cls = 'ok';
-    if (res.state === 'ok') { lead = attempts === 1 ? pick(FB.okFirst) : pick(FB.okHelped); cls = 'ok'; }
-    else if (res.state === 'almost') { lead = pick(FB.almost); cls = 'almost'; }
-    else { lead = attempts >= 3 ? pick(FB.wrongMany) : pick(FB.wrong); cls = 'again'; }
-    if (res.lead) lead = res.lead;
-    const box = h('div', { class: 'fb ' + cls }, h('strong', { class: 'lead' }, lead));
+    let kind = 'ok1', cls = 'ok';
+    if (res.state === 'ok') { kind = attempts === 1 ? 'ok1' : 'okAfter'; cls = 'ok'; }
+    else if (res.state === 'almost') { kind = 'almost'; cls = 'almost'; }
+    else { kind = attempts >= 3 ? 'err3' : attempts === 2 ? 'err2' : 'err1'; cls = 'again'; }
+    const m = F.choose(kind, { activity: ex.type, errorKind: res.errorKind });
+    const box = h('div', { class: 'fb ' + cls }, h('strong', { class: 'lead' }, res.lead || (m ? m.es : '')),
+      !res.lead && m && window.ESP.Util.showFr() ? h('small', { class: 'leadFr' }, m.fr) : null);
     if (res.html) box.append(h('div', { html: res.html }));
     if (res.state !== 'ok') { const rb = ruleBox(res.rule || ex.rule); if (rb) box.append(rb); }
     return box;
@@ -554,26 +633,48 @@
     }
   }
 
-  /* ───────── À explorer à mon rythme ───────── */
+  /* ───────── Mis palabras por revisar : mots à revoir (révision espacée) + points à explorer ───────── */
   function explore() {
-    const items = S.exploreList();
-    app.append(crumbs([{ t: 'Accueil', go: { v: 'home' } }, { t: 'À explorer à mon rythme' }]),
-      h('header', { class: 'hero' }, h('h1', {}, 'À explorer à mon rythme'),
-        h('p', {}, 'Ici, des points que tu peux regarder quand tu en as envie. Chaque élément disparaît dès que tu l’as réussi. Aucune obligation.')));
-    if (!items.length) { app.append(h('div', { class: 'card' }, h('p', {}, 'Rien pour l’instant. Quand quelque chose te résiste, ça apparaîtra ici, sans pression.'))); return; }
-    app.append(h('div', { class: 'stack' }, items.map((it) => {
-      const ans = h('div', { hidden: true }, h('p', {}, h('strong', {}, it.a || '—'), it.a ? sndBtn(it.a) : null), ruleBox(it.rule));
-      return h('div', { class: 'card' }, h('div', { class: 'note' }, it.unit), h('p', { class: 'prompt', style: 'margin-bottom:8px' }, it.q), ans,
-        h('div', { class: 'actions' }, h('button', { class: 'btn small', type: 'button', onclick: () => { ans.hidden = !ans.hidden; } }, 'Voir la réponse'),
-          h('button', { class: 'btn small', type: 'button', onclick: () => { S.release(it.key); go({ v: 'explore' }); } }, 'C’est retenu')));
-    })));
+    const items = S.exploreList(); const due = S.srsDue();
+    app.append(crumbs([{ t: 'Accueil', go: { v: 'home' } }, { t: 'Mis palabras por revisar' }]),
+      h('header', { class: 'hero' }, h('h1', {}, 'Mis palabras por revisar'),
+        h('p', {}, 'Des mots et des points que tu peux revoir quand tu en as envie. Rien ne s’accumule : ils disparaissent dès que tu les réussis. Aucune obligation.')));
+    if (due.length) {
+      app.append(h('div', { class: 'section-title' }, h('h2', {}, 'Palabras · Mots'), h('small', {}, 'Revoir, c’est retenir')),
+        h('div', { class: 'stack' }, due.slice(0, 30).map((c) => {
+          const ans = h('span', { hidden: true }, h('strong', {}, c.info.es || ''), sndBtn(c.info.es || ''));
+          return h('div', { class: 'card revRow' }, h('span', { class: 'bigE', 'aria-hidden': 'true' }, c.info.emoji || ''), h('div', { class: 'revTxt' }, h('p', { class: 'prompt', style: 'margin:0' }, c.info.fr || ''), ans),
+            h('div', { class: 'actions' }, h('button', { class: 'btn small', type: 'button', onclick: () => { ans.hidden = !ans.hidden; } }, 'Ver · Voir'),
+              h('button', { class: 'btn small', type: 'button', onclick: () => { S.srs(c.key, 'clean'); go({ v: 'explore' }); } }, 'Lo sabía · Je le savais'),
+              h('button', { class: 'btn small', type: 'button', onclick: () => { S.srs(c.key, 'solution'); go({ v: 'explore' }); } }, 'Más tarde · Plus tard')));
+        })));
+    }
+    if (items.length) {
+      app.append(h('div', { class: 'section-title' }, h('h2', {}, 'Puntos a explorar · Points à explorer')), h('div', { class: 'stack' }, items.map((it) => {
+        const ans = h('div', { hidden: true }, h('p', {}, h('strong', {}, it.a || '—'), it.a ? sndBtn(it.a) : null), ruleBox(it.rule));
+        return h('div', { class: 'card' }, h('div', { class: 'note' }, it.unit), h('p', { class: 'prompt', style: 'margin-bottom:8px' }, it.q), ans,
+          h('div', { class: 'actions' }, h('button', { class: 'btn small', type: 'button', onclick: () => { ans.hidden = !ans.hidden; } }, 'Voir la réponse'),
+            h('button', { class: 'btn small', type: 'button', onclick: () => { S.release(it.key); go({ v: 'explore' }); } }, 'C’est retenu')));
+      })));
+    }
+    if (!items.length && !due.length) app.append(h('div', { class: 'card' }, h('p', {}, 'Rien pour l’instant. Quand quelque chose te résiste, ça apparaîtra ici, sans pression.')));
   }
 
-  const U = { h, esc, shuffle, pick, speak, sndBtn, key, go, S, updateExploreCount };
+  const U = { h, esc, shuffle, pick, speak, sndBtn, key, go, S, updateExploreCount, meter, crumbs };
+  window.ESP.UApi = U;
 
   /* ───────── démarrage ───────── */
+  function updateNav() {
+    const nb = document.getElementById('prog-btn'); if (nb) nb.innerHTML = '<span class="bfTiny" aria-hidden="true">' + B.svg(B.stage(), '') + '</span> Mi progreso';
+  }
+  const _render = render;
+  render = function (st) { _render(st); updateNav(); };
   document.getElementById('brand').addEventListener('click', () => go({ v: 'home' }));
   document.getElementById('explore-btn').addEventListener('click', () => go({ v: 'explore' }));
+  document.getElementById('prog-btn').addEventListener('click', () => go({ v: 'prog' }));
+  document.getElementById('settings-btn').addEventListener('click', () => go({ v: 'settings' }));
+  B.applyMotionPref();
   history.replaceState({ v: 'home' }, '');
   render({ v: 'home' });
+  window.ESP.Modules.load().then(() => { const cur = history.state || { v: 'home' }; render(cur.v === 'mod' && cur.play ? { v: 'home' } : cur); });
 })();
