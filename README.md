@@ -1,4 +1,4 @@
-# Español en marcha
+# Proyecto Mariposa
 
 Application web statique pour l'entraînement en espagnol (situations, grammaire, conjugaison, vocabulaire, listes de classe).
 
